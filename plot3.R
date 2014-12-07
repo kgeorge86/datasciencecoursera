@@ -1,0 +1,10 @@
+library(data.table)
+hhpc<-fread("grep ^[12]/2/2007 household_power_consumption.txt")
+png("plot3.png", width=480, height= 480)
+datetime<-strptime(paste(hhpc$V1,hhpc$V2),"%d/%m/%Y %H:%M:%S")
+plot(datetime, hhpc$V7, type = "l", ylab="Energy sub metering")
+points(datetime, hhpc$V8, type = "l", col="red")
+points(datetime, hhpc$V9,  type = "l", col="blue")
+legend("topright", legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"), lty=1, col=c("black","red","blue"))
+dev.off()
+
